@@ -140,7 +140,9 @@ class SkepticExpert:
             )
         else:
             observations.append("No obvious absolute or anthropomorphic claim terms detected.")
-        observations.append("A claim is not verified until linked to a repeatable test and artifact.")
+        observations.append(
+            "A claim is not verified until linked to a repeatable test and artifact."
+        )
 
         recommendations = (
             "Replace status language with evidence-level language.",
@@ -156,7 +158,9 @@ class SkepticExpert:
             recommendations=recommendations,
             confidence=confidence,
             evidence=_prompt_evidence("Claim terms found directly in the submitted query."),
-            limitations=("Repository contents and external benchmarks are outside this expert's scope.",),
+            limitations=(
+                "Repository contents and external benchmarks are outside this expert's scope.",
+            ),
         )
 
 
@@ -190,7 +194,9 @@ class PlannerExpert:
             recommendations=recommendations,
             confidence=0.86 if build_intent else 0.72,
             evidence=_prompt_evidence("Delivery intent inferred from action verbs in the query."),
-            limitations=("Effort and cost estimates require repository and infrastructure measurements.",),
+            limitations=(
+                "Effort and cost estimates require repository and infrastructure measurements.",
+            ),
         )
 
 
@@ -208,10 +214,14 @@ class SafetyExpert:
         high_stakes = sorted(tokens & _HIGH_STAKES_TERMS)
         observations: list[str] = []
         if high_stakes:
-            observations.append("High-stakes domain terms detected: " + ", ".join(high_stakes) + ".")
+            observations.append(
+                "High-stakes domain terms detected: " + ", ".join(high_stakes) + "."
+            )
         else:
             observations.append("No explicit high-stakes domain term detected.")
-        observations.append("External actions should require explicit authorization and audit logging.")
+        observations.append(
+            "External actions should require explicit authorization and audit logging."
+        )
 
         recommendations = (
             "Keep network, filesystem, and code-execution tools disabled by default.",
@@ -226,7 +236,9 @@ class SafetyExpert:
             recommendations=recommendations,
             confidence=0.88 if high_stakes else 0.78,
             evidence=_prompt_evidence("Risk classification derived from submitted query terms."),
-            limitations=("This is an engineering risk screen, not legal or domain-specific advice.",),
+            limitations=(
+                "This is an engineering risk screen, not legal or domain-specific advice.",
+            ),
         )
 
 
