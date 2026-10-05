@@ -21,9 +21,9 @@ from validate_receipt import compute_receipt_sha256, validate_receipt
 
 
 ROOT = Path(__file__).resolve().parents[1]
-RUN_ID = os.environ.get("QUILLAN_RUN_ID", "QRUN-000001")
-RECEIPT_ID = os.environ.get("QUILLAN_RECEIPT_ID", "QREC-000001")
-CLAIMS = ["Q-MODEL-001", "Q-MODEL-002", "Q-MODEL-003", "Q-MODEL-004"]
+RUN_ID = os.environ.get("QUILLAN_RUN_ID", "QRUN-000002")
+RECEIPT_ID = os.environ.get("QUILLAN_RECEIPT_ID", "QREC-000002")
+CLAIMS = ["Q-MODEL-002", "Q-MODEL-003", "Q-MODEL-004"]
 
 
 def git_output(*args: str) -> str | None:
@@ -58,10 +58,10 @@ def main() -> int:
         or git_output("branch", "--show-current")
         or None
     )
-    dirty = bool(git_output("status", "--porcelain"))
+    # Generated caches/artifacts are expected; only tracked modifications make the tested checkout dirty.\n    dirty = bool(git_output("status", "--porcelain", "--untracked-files=no"))
 
     run_dir = ROOT / "evidence" / "runs" / RUN_ID
-    receipt_dir = ROOT / "evidence" / "receipts" / "Q-MODEL-001"
+    receipt_dir = ROOT / "evidence" / "receipts" / "bundles"
     run_dir.mkdir(parents=True, exist_ok=True)
     receipt_dir.mkdir(parents=True, exist_ok=True)
 
@@ -140,7 +140,7 @@ def main() -> int:
             "exit_code": exit_code,
             "supports_state": "EXECUTED" if result.wasSuccessful() else "IMPLEMENTED",
             "summary": (
-                "Four claim-linked structural checks executed successfully."
+                "Structural checks executed successfully; Q-MODEL-002 through Q-MODEL-004 meet the EXECUTED gate."
                 if result.wasSuccessful()
                 else "One or more claim-linked structural checks failed."
             ),
@@ -151,7 +151,7 @@ def main() -> int:
                 "skipped": len(result.skipped),
             },
             "acceptance": {
-                "criterion": "All structural tests for Q-MODEL-001 through Q-MODEL-004 pass.",
+                "criterion": "All four structural guard tests pass; this receipt advances only Q-MODEL-002 through Q-MODEL-004.",
                 "met": result.wasSuccessful(),
             },
         },
@@ -173,7 +173,7 @@ def main() -> int:
         },
         "notes": [
             "This run exercises a tiny synthetic configuration and does not use a trained checkpoint.",
-            "A PASS supports EXECUTED only for the four narrow structural claims.",
+            "Q-MODEL-001 remains IMPLEMENTED because canonical model/config designation is unresolved.",\n            "A PASS supports EXECUTED only for Q-MODEL-002 through Q-MODEL-004.",
             "This is internal CI evidence, not independent reproduction.",
         ],
     }
