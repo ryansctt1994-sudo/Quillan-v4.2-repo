@@ -1,0 +1,238 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ryansctt1994-sudo/Quillan-v4.2-repo/evidence/schema/evidence-receipt-v1.schema.json",
+  "title": "Quillan Evidence Receipt v1",
+  "description": "Machine-readable record of a Quillan execution relevant to one or more registered claims. A valid receipt records an event; it does not by itself prove the truth of the supported claim.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "receipt_id",
+    "run_id",
+    "claim_ids",
+    "repository",
+    "commit",
+    "timestamp_utc",
+    "producer",
+    "environment",
+    "invocation",
+    "outcome",
+    "artifacts",
+    "integrity"
+  ],
+  "properties": {
+    "schema": {
+      "const": "quillan-evidence-receipt-v1"
+    },
+    "receipt_id": {
+      "type": "string",
+      "pattern": "^QREC-[0-9]{6,}$"
+    },
+    "run_id": {
+      "type": "string",
+      "pattern": "^QRUN-[0-9]{6,}$"
+    },
+    "claim_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^Q-[A-Z0-9_-]+-[0-9]{3}$"
+      }
+    },
+    "repository": {
+      "type": "string",
+      "const": "ryansctt1994-sudo/Quillan-v4.2-repo"
+    },
+    "commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "branch": {
+      "type": ["string", "null"]
+    },
+    "dirty_worktree": {
+      "type": "boolean",
+      "default": false
+    },
+    "timestamp_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "name"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["local", "ci", "external_reproducer"]
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "workflow_run": {
+          "type": ["string", "integer", "null"]
+        },
+        "independent_of_project_author": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "implementation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "entrypoint": {"type": ["string", "null"]},
+        "config_path": {"type": ["string", "null"]},
+        "checkpoint": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "required": ["path", "sha256"],
+          "properties": {
+            "path": {"type": "string"},
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        }
+      }
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["python", "platform"],
+      "properties": {
+        "python": {"type": "string"},
+        "platform": {"type": "string"},
+        "torch": {"type": ["string", "null"]},
+        "cuda": {"type": ["string", "null"]},
+        "device": {"type": ["string", "null"]},
+        "dependency_lock_sha256": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "invocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["command"],
+      "properties": {
+        "command": {
+          "type": "string",
+          "minLength": 1
+        },
+        "working_directory": {
+          "type": ["string", "null"]
+        },
+        "seed": {
+          "type": ["integer", "string", "null"]
+        },
+        "dataset_id": {
+          "type": ["string", "null"]
+        },
+        "dataset_sha256": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "config_sha256": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "exit_code"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["PASS", "FAIL", "ERROR", "BLOCKED", "SKIPPED"]
+        },
+        "exit_code": {
+          "type": ["integer", "null"]
+        },
+        "supports_state": {
+          "type": "string",
+          "enum": [
+            "IMPLEMENTED",
+            "EXECUTED",
+            "REPRODUCED",
+            "BENCHMARKED",
+            "INDEPENDENTLY_REPRODUCED"
+          ]
+        },
+        "summary": {
+          "type": ["string", "null"]
+        },
+        "measurements": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "acceptance": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "properties": {
+            "criterion": {"type": "string"},
+            "met": {"type": "boolean"}
+          },
+          "required": ["criterion", "met"]
+        }
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256", "kind"],
+        "properties": {
+          "path": {"type": "string"},
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "stdout",
+              "stderr",
+              "result",
+              "metrics",
+              "telemetry",
+              "manifest",
+              "checkpoint",
+              "plot",
+              "other"
+            ]
+          }
+        }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["receipt_sha256_policy"],
+      "properties": {
+        "receipt_sha256_policy": {
+          "type": "string",
+          "const": "Hash canonical UTF-8 JSON with integrity.receipt_sha256 omitted."
+        },
+        "receipt_sha256": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "notes": {
+      "type": ["array", "null"],
+      "items": {"type": "string"}
+    }
+  }
+}
