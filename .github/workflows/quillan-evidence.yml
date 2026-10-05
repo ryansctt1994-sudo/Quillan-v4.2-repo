@@ -7,6 +7,11 @@ on:
       - "eval/**"
       - "evidence/**"
       - ".github/workflows/quillan-evidence.yml"
+      - "README.md"
+      - "ARCHITECTURE.md"
+      - "CLAIMS.yaml"
+      - "LIMITATIONS.md"
+      - "REPOSITORY_LAYOUT.md"
   push:
     branches:
       - "research/architecture-claims-framework"
@@ -15,6 +20,11 @@ on:
       - "eval/**"
       - "evidence/**"
       - ".github/workflows/quillan-evidence.yml"
+      - "README.md"
+      - "ARCHITECTURE.md"
+      - "CLAIMS.yaml"
+      - "LIMITATIONS.md"
+      - "REPOSITORY_LAYOUT.md"
   workflow_dispatch:
 
 permissions:
