@@ -1,0 +1,81 @@
+{
+  "artifacts": [
+    {
+      "kind": "stdout",
+      "path": "evidence/runs/QRUN-000003/structural-test-report.txt",
+      "sha256": "68a9df89dff4ae8718cb98f2f7e1984e0337b613738eb8cea468ac569f6fd737"
+    },
+    {
+      "kind": "result",
+      "path": "evidence/runs/QRUN-000003/structural-results.json",
+      "sha256": "26fcf63a1796e80a722a5427fe880510632a53fe0e6bef917a50509702187246"
+    }
+  ],
+  "branch": "research/architecture-claims-framework",
+  "claim_ids": [
+    "Q-MODEL-002",
+    "Q-MODEL-003",
+    "Q-MODEL-004",
+    "Q-MODEL-005"
+  ],
+  "commit": "efea7fd21e35db573f2996c6b1775d2aa362fcd9",
+  "dirty_worktree": false,
+  "environment": {
+    "cuda": null,
+    "dependency_lock_sha256": null,
+    "device": "cpu",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.11.16",
+    "torch": "2.10.0+cpu"
+  },
+  "implementation": {
+    "checkpoint": null,
+    "config_path": "eval/structural/test_enhanced_council.py::FixtureConfig",
+    "entrypoint": "Quillan-v4.2-model/quillan_council_enhanced.py"
+  },
+  "integrity": {
+    "receipt_sha256": "bf46ad364d8ed48c82fcf724a2c669f3d9ecaa90c8c65ecaec87c8c807f0f959",
+    "receipt_sha256_policy": "Hash canonical UTF-8 JSON with integrity.receipt_sha256 omitted."
+  },
+  "invocation": {
+    "command": "python evidence/run_structural_evidence.py",
+    "config_sha256": null,
+    "dataset_id": "synthetic-structural-fixture",
+    "dataset_sha256": null,
+    "seed": "1337/2026 fixture seeds",
+    "working_directory": "."
+  },
+  "notes": [
+    "This run exercises a tiny synthetic configuration and does not use a trained checkpoint.",
+    "Q-MODEL-001 remains IMPLEMENTED because canonical model/config designation is unresolved.",
+    "A PASS supports EXECUTED for Q-MODEL-002 through Q-MODEL-005.",
+    "This is internal CI evidence, not independent reproduction."
+  ],
+  "outcome": {
+    "acceptance": {
+      "criterion": "All five structural/gradient guard tests pass; this receipt advances Q-MODEL-002 through Q-MODEL-005.",
+      "met": true
+    },
+    "exit_code": 0,
+    "measurements": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests_run": 5
+    },
+    "status": "PASS",
+    "summary": "Structural and gradient checks executed successfully; Q-MODEL-002 through Q-MODEL-005 meet the EXECUTED gate.",
+    "supports_state": "EXECUTED"
+  },
+  "producer": {
+    "independent_of_project_author": false,
+    "kind": "ci",
+    "name": "github-actions",
+    "workflow_run": "37296522097"
+  },
+  "receipt_id": "QREC-000003",
+  "repository": "ryansctt1994-sudo/Quillan-v4.2-repo",
+  "run_id": "QRUN-000003",
+  "schema": "quillan-evidence-receipt-v1",
+  "timestamp_utc": "2026-10-05T10:26:23.865904Z"
+}
