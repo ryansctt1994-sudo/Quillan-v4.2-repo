@@ -35,6 +35,12 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Compile evidence harness
+        run: |
+          python -m py_compile evidence/validate_receipt.py
+          python -m py_compile evidence/run_structural_evidence.py
+          python -m py_compile eval/structural/test_enhanced_council.py
+
       - name: Install evidence dependencies
         run: |
           python -m pip install --upgrade pip
