@@ -137,19 +137,30 @@ claims:
   - id: Q-MODEL-005
     statement: "Experts selected by the enhanced router receive nonzero, finite gradients under a declared training fixture."
     layer: model_core
-    claim_type: RESEARCH_HYPOTHESIS
-    evidence_state: PROPOSED
+    claim_type: ENGINEERING_CLAIM
+    evidence_state: EXECUTED
+    pinned_commit: "efea7fd21e35db573f2996c6b1775d2aa362fcd9"
     implementation_paths:
       - "Quillan-v4.2-model/quillan_council_enhanced.py"
+    evidence_paths:
+      - "evidence/receipts/bundles/QRUN-000003.json"
+      - "evidence/runs/QRUN-000003/structural-results.json"
+      - "evidence/runs/QRUN-000003/structural-test-report.txt"
+    evidence_basis:
+      - type: ci_execution
+        detail: "QRUN-000003 ran backward() on a deterministic synthetic fixture and verified finite nonzero gradients for every selected expert and for router.weight, while unselected experts remained without nonzero gradients."
     acceptance_criterion:
-      protocol: "Construct a deterministic training fixture, run backward(), and inspect per-expert gradient norms."
-      pass_condition: "Selected experts receive finite nonzero gradients; unselected experts behave according to the declared routing design."
-    evidence_paths: []
+      protocol: "Construct a deterministic training fixture, run backward(), and inspect per-expert and router gradient norms."
+      current: "QRUN-000003 PASS: selected experts and router received finite nonzero gradients; unselected experts did not receive nonzero gradients."
+      next: "Repeat from a fresh checkout, then measure gradient health under representative language-model training rather than a tiny synthetic fixture."
     limitations:
-      - "No claim is made yet about gradient quality during full language-model training."
+      - "This establishes gradient connectivity under the declared fixture only."
+      - "It does not establish healthy optimization dynamics during full language-model training."
+      - "It does not establish expert specialization, load balance, convergence, or quality gains."
+      - "Internal CI execution is not independent reproduction."
     next_gate:
-      target_state: EXECUTED
-      requirement: "Implement gradient-flow test and store machine-readable results."
+      target_state: REPRODUCED
+      requirement: "Fresh-checkout rerun reproduces selected/unselected expert and router gradient behavior."
 
   - id: Q-MODEL-006
     statement: "Quillan routing avoids pathological expert collapse during training."
