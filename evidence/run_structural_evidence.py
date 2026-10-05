@@ -58,7 +58,8 @@ def main() -> int:
         or git_output("branch", "--show-current")
         or None
     )
-    # Generated caches/artifacts are expected; only tracked modifications make the tested checkout dirty.\n    dirty = bool(git_output("status", "--porcelain", "--untracked-files=no"))
+    # Generated caches/artifacts are expected; only tracked modifications make the tested checkout dirty.
+    dirty = bool(git_output("status", "--porcelain", "--untracked-files=no"))
 
     run_dir = ROOT / "evidence" / "runs" / RUN_ID
     receipt_dir = ROOT / "evidence" / "receipts" / "bundles"
