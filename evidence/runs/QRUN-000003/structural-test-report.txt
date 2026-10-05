@@ -1,0 +1,15 @@
+test_q_model_001_instantiates_32_experts (test_enhanced_council.EnhancedCouncilStructuralTests.test_q_model_001_instantiates_32_experts)
+Q-MODEL-001: the tested council configuration instantiates 32 experts. ... ok
+test_q_model_002_sparse_top2_routing_executes (test_enhanced_council.EnhancedCouncilStructuralTests.test_q_model_002_sparse_top2_routing_executes)
+Q-MODEL-002: each token receives exactly two valid expert selections. ... ok
+test_q_model_003_router_telemetry_is_observable (test_enhanced_council.EnhancedCouncilStructuralTests.test_q_model_003_router_telemetry_is_observable)
+Q-MODEL-003: selected expert IDs and router logits are returned and finite. ... ok
+test_q_model_004_consensus_score_and_modulation_execute (test_enhanced_council.EnhancedCouncilStructuralTests.test_q_model_004_consensus_score_and_modulation_execute)
+Q-MODEL-004: scalar sigmoid consensus is bounded and modulates output. ... ok
+test_q_model_005_selected_experts_receive_expected_gradients (test_enhanced_council.EnhancedCouncilStructuralTests.test_q_model_005_selected_experts_receive_expected_gradients)
+Q-MODEL-005: selected experts and router receive finite nonzero gradients. ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.071s
+
+OK
