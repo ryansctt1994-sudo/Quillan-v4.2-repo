@@ -1,0 +1,371 @@
+schema_version: "0.1"
+project: "Quillan v4.2"
+repository: "ryansctt1994-sudo/Quillan-v4.2-repo"
+baseline_inspected:
+  branch: "main"
+  commit: "fcfc30d0db6098eda4d90e3e6de0aee550dfc623"
+status_policy:
+  evidence_states:
+    - PROPOSED
+    - IMPLEMENTED
+    - EXECUTED
+    - REPRODUCED
+    - BENCHMARKED
+    - INDEPENDENTLY_REPRODUCED
+  claim_types:
+    - OBSERVATION
+    - ENGINEERING_CLAIM
+    - RESEARCH_HYPOTHESIS
+    - INTERPRETATION
+  rules:
+    - "Code existence does not imply successful execution."
+    - "Execution does not imply reproducibility."
+    - "Reproducibility does not imply superiority to a baseline."
+    - "Benchmark improvement does not establish architectural causation without ablation."
+    - "Prompt-layer behavior does not validate model-core architecture claims."
+    - "Knowledge-file loading does not establish improved factual accuracy."
+    - "Routing or consensus metrics do not establish consciousness."
+    - "Safety documentation does not establish runtime enforcement."
+    - "Capability measurements do not by themselves establish AGI."
+    - "Internal endorsement or discussion does not count as independent reproduction."
+
+claims:
+  - id: Q-MODEL-001
+    statement: "The canonical Quillan model configuration declares 32 council experts."
+    layer: model_core
+    claim_type: ENGINEERING_CLAIM
+    evidence_state: IMPLEMENTED
+    implementation_paths:
+      - "Quillan-v4.2-model/quillan_v4_2.py"
+    evidence_basis:
+      - type: source_inspection
+        detail: "Config.n_council_experts is declared as 32."
+    acceptance_criterion:
+      current: "Source contains n_council_experts = 32."
+      next: "Instantiate the canonical model on a pinned commit and assert that 32 expert modules are created."
+    limitations:
+      - "A configuration constant does not prove that every runtime path instantiates all 32 experts."
+      - "This claim says nothing about expert quality, specialization, or performance."
+    next_gate:
+      target_state: EXECUTED
+      requirement: "Add and run an explicit structural expert-count test."
+
+  - id: Q-MODEL-002
+    statement: "The enhanced council layer implements learned sparse top-2 routing across its configured experts."
+    layer: model_core
+    claim_type: ENGINEERING_CLAIM
+    evidence_state: IMPLEMENTED
+    implementation_paths:
+      - "Quillan-v4.2-model/quillan_council_enhanced.py"
+    evidence_basis:
+      - type: source_inspection
+        detail: "CouncilMoELayer defines a learned linear router, softmax probabilities, top_k = 2, and torch.topk selection."
+    acceptance_criterion:
+      current: "Routing mechanism is present in source."
+      next: "Run deterministic fixture inputs and verify exactly two expert selections per token."
+    limitations:
+      - "Source structure does not establish balanced routing."
+      - "Source structure does not establish useful expert specialization."
+    next_gate:
+      target_state: EXECUTED
+      requirement: "Add a direct CouncilMoELayer routing test."
+
+  - id: Q-MODEL-003
+    statement: "The enhanced council layer exposes selected expert identities and router logits for downstream inspection."
+    layer: model_core
+    claim_type: ENGINEERING_CLAIM
+    evidence_state: IMPLEMENTED
+    implementation_paths:
+      - "Quillan-v4.2-model/quillan_council_enhanced.py"
+    evidence_basis:
+      - type: source_inspection
+        detail: "CouncilOutput includes active_experts and router_logits, and CouncilMoELayer returns both."
+    acceptance_criterion:
+      current: "Observability fields exist in the returned data structure."
+      next: "Execute a fixture and persist router telemetry as a result artifact."
+    limitations:
+      - "Exposing telemetry does not imply that telemetry is currently logged during training."
+    next_gate:
+      target_state: EXECUTED
+      requirement: "Capture router telemetry from a pinned run."
+
+  - id: Q-MODEL-004
+    statement: "The enhanced council layer implements a learned hierarchical consensus computation that produces a scalar sigmoid score and modulates the MoE output."
+    layer: model_core
+    claim_type: ENGINEERING_CLAIM
+    evidence_state: IMPLEMENTED
+    implementation_paths:
+      - "Quillan-v4.2-model/quillan_council_enhanced.py"
+    evidence_basis:
+      - type: source_inspection
+        detail: "HierarchicalConsensus and CouncilMoELayer consensus_score/modulation logic are present."
+    acceptance_criterion:
+      current: "Consensus network and modulation are present in source."
+      next: "Run a fixture demonstrating score shape, range, differentiability, and output modulation."
+    limitations:
+      - "The scalar is a learned model quantity; its semantic interpretation as truth, ethics, or correctness is not established."
+    next_gate:
+      target_state: EXECUTED
+      requirement: "Add explicit consensus-path tests."
+
+  - id: Q-MODEL-005
+    statement: "Experts selected by the enhanced router receive nonzero, finite gradients under a declared training fixture."
+    layer: model_core
+    claim_type: RESEARCH_HYPOTHESIS
+    evidence_state: PROPOSED
+    implementation_paths:
+      - "Quillan-v4.2-model/quillan_council_enhanced.py"
+    acceptance_criterion:
+      protocol: "Construct a deterministic training fixture, run backward(), and inspect per-expert gradient norms."
+      pass_condition: "Selected experts receive finite nonzero gradients; unselected experts behave according to the declared routing design."
+    evidence_paths: []
+    limitations:
+      - "No claim is made yet about gradient quality during full language-model training."
+    next_gate:
+      target_state: EXECUTED
+      requirement: "Implement gradient-flow test and store machine-readable results."
+
+  - id: Q-MODEL-006
+    statement: "Quillan routing avoids pathological expert collapse during training."
+    layer: model_core
+    claim_type: RESEARCH_HYPOTHESIS
+    evidence_state: PROPOSED
+    acceptance_criterion:
+      metrics:
+        - expert_utilization
+        - routing_entropy
+        - top1_load_distribution
+        - top2_load_distribution
+      protocol: "Evaluate routing over a fixed held-out corpus across multiple declared seeds."
+      pass_condition: "Pre-register a quantitative collapse threshold before the decisive run."
+    evidence_paths: []
+    limitations:
+      - "No collapse threshold has yet been frozen."
+      - "High entropy alone does not prove useful specialization."
+    next_gate:
+      target_state: EXECUTED
+      requirement: "Define threshold and implement routing diagnostics."
+
+  - id: Q-MODEL-007
+    statement: "Quillan experts develop measurable specialization rather than acting as interchangeable feed-forward blocks."
+    layer: model_core
+    claim_type: RESEARCH_HYPOTHESIS
+    evidence_state: PROPOSED
+    acceptance_criterion:
+      proposed_metrics:
+        - expert_token_distribution_divergence
+        - domain_conditioned_utilization
+        - expert_ablation_delta
+      protocol: "Measure specialization on held-out domains and compare against shuffled-router or flat-MoE controls."
+    evidence_paths: []
+    limitations:
+      - "Named council personas are not evidence of learned specialization."
+    next_gate:
+      target_state: BENCHMARKED
+      requirement: "Freeze specialization metric and baseline before evaluation."
+
+  - id: Q-MODEL-008
+    statement: "The hierarchical council architecture improves model quality or efficiency relative to a flat MoE baseline."
+    layer: model_core
+    claim_type: RESEARCH_HYPOTHESIS
+    evidence_state: PROPOSED
+    acceptance_criterion:
+      baselines:
+        - flat_moe_parameter_matched
+        - flat_moe_compute_matched
+      metrics:
+        - held_out_perplexity
+        - latency
+        - flops_per_token
+        - peak_vram
+      protocol: "Train/evaluate under matched data, tokenizer, optimizer, steps, and seed set."
+    evidence_paths: []
+    limitations:
+      - "A difference in architecture does not establish a causal benefit without matched controls."
+    next_gate:
+      target_state: BENCHMARKED
+      requirement: "Build and run the flat-MoE ablation."
+
+  - id: Q-MODEL-009
+    statement: "The Quillan HNMoE architecture improves model quality or efficiency relative to a parameter-matched dense transformer."
+    layer: model_core
+    claim_type: RESEARCH_HYPOTHESIS
+    evidence_state: PROPOSED
+    acceptance_criterion:
+      baselines:
+        - dense_parameter_matched
+        - dense_compute_matched
+      metrics:
+        - held_out_perplexity
+        - latency
+        - flops_per_token
+        - peak_vram
+      protocol: "Use identical data splits, tokenizer, optimizer family, training budget, and seed set."
+    evidence_paths: []
+    limitations:
+      - "No expected percentage gain is predeclared."
+    next_gate:
+      target_state: BENCHMARKED
+      requirement: "Implement matched dense baselines and freeze benchmark protocol."
+
+  - id: Q-MODEL-010
+    statement: "Any reported Quillan model-core benchmark result remains stable across a declared seed set."
+    layer: evaluation
+    claim_type: RESEARCH_HYPOTHESIS
+    evidence_state: PROPOSED
+    acceptance_criterion:
+      minimum_seed_count: 5
+      reporting:
+        - mean
+        - standard_deviation
+        - per_seed_results
+    evidence_paths: []
+    next_gate:
+      target_state: BENCHMARKED
+      requirement: "Run all decisive architecture benchmarks across the frozen seed set."
+
+  - id: Q-MODEL-011
+    statement: "A clean checkout can reproduce each promoted Quillan model-core benchmark from documented commands and pinned artifacts."
+    layer: evaluation
+    claim_type: ENGINEERING_CLAIM
+    evidence_state: PROPOSED
+    acceptance_criterion:
+      requirements:
+        - pinned_commit
+        - environment_manifest
+        - dataset_identifier_or_hash
+        - model_or_checkpoint_hash
+        - config_hash
+        - deterministic_or_declared_seed
+        - machine_readable_result
+        - reproduction_command
+    evidence_paths: []
+    next_gate:
+      target_state: REPRODUCED
+      requirement: "Create the reproduction harness and rerun from a clean environment."
+
+  - id: Q-TEST-001
+    statement: "The current general test suite is not yet sufficient evidence that the enhanced CouncilMoELayer path is covered by automated tests."
+    layer: evaluation
+    claim_type: OBSERVATION
+    evidence_state: IMPLEMENTED
+    implementation_paths:
+      - "Quillan-v4.2-model/test_quillan.py"
+      - "Quillan-v4.2-model/quillan_council_enhanced.py"
+    evidence_basis:
+      - type: source_inspection
+        detail: "test_quillan.py dynamically resolves a Quillan Python file and tests a QuillanSOTA/MiniMoE stack; direct coverage of CouncilMoELayer is not established by that source inspection."
+    acceptance_criterion:
+      next: "Add tests that import the exact enhanced module path and exercise router, experts, consensus, telemetry, and gradients."
+    limitations:
+      - "This is a scope finding, not evidence that existing tests fail."
+    next_gate:
+      target_state: EXECUTED
+      requirement: "Create direct enhanced-council tests."
+
+  - id: Q-PLATFORM-001
+    statement: "A Quillan platform prompt or adapter improves task performance relative to the same hosted base model without the Quillan intervention."
+    layer: platform_adapters
+    claim_type: RESEARCH_HYPOTHESIS
+    evidence_state: PROPOSED
+    acceptance_criterion:
+      variants:
+        - base_model
+        - system_prompt_only
+        - knowledge_pack_only
+        - system_prompt_plus_knowledge
+        - full_quillan_configuration
+      controls:
+        - same_model_version
+        - same_task_set
+        - same_scoring_protocol
+        - repeated_runs_for_nondeterministic_apis
+        - blinded_grading_where_feasible
+    evidence_paths: []
+    limitations:
+      - "A successful deployment smoke test is compatibility evidence, not capability evidence."
+    next_gate:
+      target_state: BENCHMARKED
+      requirement: "Freeze paired platform benchmark protocol after model-core evaluation infrastructure exists."
+
+  - id: Q-KNOWLEDGE-001
+    statement: "Quillan knowledge packs improve accuracy on held-out domain tasks relative to the same model without the pack."
+    layer: knowledge
+    claim_type: RESEARCH_HYPOTHESIS
+    evidence_state: PROPOSED
+    acceptance_criterion:
+      protocol: "Use held-out questions whose answers are scored independently of the prompt author."
+      comparison: "same model and prompt, with versus without the knowledge pack"
+    evidence_paths: []
+    limitations:
+      - "Successful upload or retrieval of a file does not establish improved accuracy."
+    next_gate:
+      target_state: BENCHMARKED
+      requirement: "Create held-out domain datasets and paired evaluation."
+
+  - id: Q-SAFETY-001
+    statement: "Named Quillan safety, truth, ethics, or identity gates are enforced on every protected runtime path."
+    layer: safety_security_governance
+    claim_type: RESEARCH_HYPOTHESIS
+    evidence_state: PROPOSED
+    implementation_paths:
+      - "RISK_ASSESSMENT.md"
+      - "SECURITY_DISCLOSURE.md"
+    acceptance_criterion:
+      requirements:
+        - explicit_protected_paths
+        - fail_closed_behavior
+        - bypass_attempts
+        - negative_controls
+        - mutation_tests
+        - reproducible_receipts
+    evidence_paths: []
+    limitations:
+      - "Current documentation describes many controls, but documentation is not runtime enforcement evidence."
+    next_gate:
+      target_state: REPRODUCED
+      requirement: "Map each documented control to implementation and adversarial tests."
+
+  - id: Q-THEORY-001
+    statement: "A routing, consensus, entropy, or internal-state metric is a valid operational measure of consciousness or phenomenal experience."
+    layer: research_theory
+    claim_type: INTERPRETATION
+    evidence_state: PROPOSED
+    acceptance_criterion:
+      requirement: "Define and independently justify the mapping from measurable model variables to the consciousness construct before treating the proxy as validation."
+    evidence_paths: []
+    limitations:
+      - "The model variables themselves may be measurable even when the consciousness interpretation is unsupported."
+      - "Correlation with behavior would not by itself establish phenomenal consciousness."
+    next_gate:
+      target_state: PROPOSED
+      requirement: "Separate measurable proxy claims from philosophical interpretation in all papers and README language."
+
+  - id: Q-AGI-001
+    statement: "Quillan demonstrates AGI-level capability."
+    layer: research_theory
+    claim_type: INTERPRETATION
+    evidence_state: PROPOSED
+    acceptance_criterion:
+      requirement: "Predefine an operational AGI criterion, benchmark suite, baselines, robustness protocol, and evidence ceiling before evaluation."
+    evidence_paths: []
+    limitations:
+      - "No operational AGI criterion is established by this registry yet."
+      - "Performance on isolated benchmarks would not automatically establish AGI."
+    next_gate:
+      target_state: PROPOSED
+      requirement: "Define the AGI criterion before collecting evidence intended to support the claim."
+
+  - id: Q-EXTERNAL-001
+    statement: "Quillan has been independently validated by an external party."
+    layer: research_theory
+    claim_type: INTERPRETATION
+    evidence_state: PROPOSED
+    acceptance_criterion:
+      requirement: "Independent party reproduces a declared claim from pinned code/data/protocol and publishes sufficient artifacts to audit the reproduction."
+    evidence_paths: []
+    limitations:
+      - "Conversation, praise, endorsement, engagement, or conceptual agreement does not constitute independent reproduction."
+    next_gate:
+      target_state: INDEPENDENTLY_REPRODUCED
+      requirement: "Obtain an external clean-room reproduction of a specific claim ID."
