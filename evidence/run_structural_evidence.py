@@ -21,8 +21,9 @@ from validate_receipt import compute_receipt_sha256, validate_receipt
 
 
 ROOT = Path(__file__).resolve().parents[1]
-RUN_ID = os.environ.get("QUILLAN_RUN_ID", "QRUN-000003")
-RECEIPT_ID = os.environ.get("QUILLAN_RECEIPT_ID", "QREC-000003")
+RUN_SUFFIX = os.environ.get("GITHUB_RUN_ID") or datetime.now(timezone.utc).strftime("%Y%m%d%H%M%S%f")
+RUN_ID = os.environ.get("QUILLAN_RUN_ID") or f"QRUN-{RUN_SUFFIX}"
+RECEIPT_ID = os.environ.get("QUILLAN_RECEIPT_ID") or f"QREC-{RUN_SUFFIX}"
 CLAIMS = ["Q-MODEL-002", "Q-MODEL-003", "Q-MODEL-004", "Q-MODEL-005"]
 
 
