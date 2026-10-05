@@ -21,9 +21,9 @@ from validate_receipt import compute_receipt_sha256, validate_receipt
 
 
 ROOT = Path(__file__).resolve().parents[1]
-RUN_ID = os.environ.get("QUILLAN_RUN_ID", "QRUN-000002")
-RECEIPT_ID = os.environ.get("QUILLAN_RECEIPT_ID", "QREC-000002")
-CLAIMS = ["Q-MODEL-002", "Q-MODEL-003", "Q-MODEL-004"]
+RUN_ID = os.environ.get("QUILLAN_RUN_ID", "QRUN-000003")
+RECEIPT_ID = os.environ.get("QUILLAN_RECEIPT_ID", "QREC-000003")
+CLAIMS = ["Q-MODEL-002", "Q-MODEL-003", "Q-MODEL-004", "Q-MODEL-005"]
 
 
 def git_output(*args: str) -> str | None:
@@ -141,7 +141,7 @@ def main() -> int:
             "exit_code": exit_code,
             "supports_state": "EXECUTED" if result.wasSuccessful() else "IMPLEMENTED",
             "summary": (
-                "Structural checks executed successfully; Q-MODEL-002 through Q-MODEL-004 meet the EXECUTED gate."
+                "Structural and gradient checks executed successfully; Q-MODEL-002 through Q-MODEL-005 meet the EXECUTED gate."
                 if result.wasSuccessful()
                 else "One or more claim-linked structural checks failed."
             ),
@@ -152,7 +152,7 @@ def main() -> int:
                 "skipped": len(result.skipped),
             },
             "acceptance": {
-                "criterion": "All four structural guard tests pass; this receipt advances only Q-MODEL-002 through Q-MODEL-004.",
+                "criterion": "All five structural/gradient guard tests pass; this receipt advances Q-MODEL-002 through Q-MODEL-005.",
                 "met": result.wasSuccessful(),
             },
         },
@@ -175,7 +175,7 @@ def main() -> int:
         "notes": [
             "This run exercises a tiny synthetic configuration and does not use a trained checkpoint.",
             "Q-MODEL-001 remains IMPLEMENTED because canonical model/config designation is unresolved.",
-            "A PASS supports EXECUTED only for Q-MODEL-002 through Q-MODEL-004.",
+            "A PASS supports EXECUTED for Q-MODEL-002 through Q-MODEL-005.",
             "This is internal CI evidence, not independent reproduction.",
         ],
     }
