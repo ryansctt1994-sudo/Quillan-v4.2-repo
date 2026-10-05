@@ -54,59 +54,85 @@ claims:
     statement: "The enhanced council layer implements learned sparse top-2 routing across its configured experts."
     layer: model_core
     claim_type: ENGINEERING_CLAIM
-    evidence_state: IMPLEMENTED
+    evidence_state: EXECUTED
+    pinned_commit: "5064bcee0c28ce85a69ff5e272c967789562d245"
     implementation_paths:
       - "Quillan-v4.2-model/quillan_council_enhanced.py"
+    evidence_paths:
+      - "evidence/receipts/bundles/QRUN-000002.json"
+      - "evidence/runs/QRUN-000002/structural-results.json"
+      - "evidence/runs/QRUN-000002/structural-test-report.txt"
     evidence_basis:
       - type: source_inspection
         detail: "CouncilMoELayer defines a learned linear router, softmax probabilities, top_k = 2, and torch.topk selection."
+      - type: ci_execution
+        detail: "QRUN-000002 executed a deterministic synthetic fixture and verified exactly two distinct valid expert selections per token."
     acceptance_criterion:
-      current: "Routing mechanism is present in source."
-      next: "Run deterministic fixture inputs and verify exactly two expert selections per token."
+      current: "QRUN-000002 PASS: exactly two valid expert selections were returned per synthetic token."
+      next: "Repeat the same protocol from a fresh checkout/environment to test reproducibility."
     limitations:
-      - "Source structure does not establish balanced routing."
-      - "Source structure does not establish useful expert specialization."
+      - "This structural fixture does not establish balanced routing."
+      - "This structural fixture does not establish useful expert specialization."
+      - "Internal CI execution is not independent reproduction."
     next_gate:
-      target_state: EXECUTED
-      requirement: "Add a direct CouncilMoELayer routing test."
+      target_state: REPRODUCED
+      requirement: "Fresh-checkout rerun reproduces the same structural result from documented commands."
 
   - id: Q-MODEL-003
     statement: "The enhanced council layer exposes selected expert identities and router logits for downstream inspection."
     layer: model_core
     claim_type: ENGINEERING_CLAIM
-    evidence_state: IMPLEMENTED
+    evidence_state: EXECUTED
+    pinned_commit: "5064bcee0c28ce85a69ff5e272c967789562d245"
     implementation_paths:
       - "Quillan-v4.2-model/quillan_council_enhanced.py"
+    evidence_paths:
+      - "evidence/receipts/bundles/QRUN-000002.json"
+      - "evidence/runs/QRUN-000002/structural-results.json"
+      - "evidence/runs/QRUN-000002/structural-test-report.txt"
     evidence_basis:
       - type: source_inspection
         detail: "CouncilOutput includes active_experts and router_logits, and CouncilMoELayer returns both."
+      - type: ci_execution
+        detail: "QRUN-000002 verified active_experts shape (2,3,2), router_logits shape (2,3,32), finite logits, and agreement between returned selections and top-2 softmax logits."
     acceptance_criterion:
-      current: "Observability fields exist in the returned data structure."
-      next: "Execute a fixture and persist router telemetry as a result artifact."
+      current: "QRUN-000002 PASS: router telemetry was returned and matched the routing decision under the synthetic fixture."
+      next: "Persist richer routing telemetry across a fresh rerun and later training/evaluation corpora."
     limitations:
-      - "Exposing telemetry does not imply that telemetry is currently logged during training."
+      - "Exposing telemetry does not imply that telemetry is currently logged during full training."
+      - "The fixture does not establish load balance, specialization, or routing quality."
+      - "Internal CI execution is not independent reproduction."
     next_gate:
-      target_state: EXECUTED
-      requirement: "Capture router telemetry from a pinned run."
+      target_state: REPRODUCED
+      requirement: "Fresh-checkout rerun reproduces telemetry shape, finiteness, and selection agreement."
 
   - id: Q-MODEL-004
     statement: "The enhanced council layer implements a learned hierarchical consensus computation that produces a scalar sigmoid score and modulates the MoE output."
     layer: model_core
     claim_type: ENGINEERING_CLAIM
-    evidence_state: IMPLEMENTED
+    evidence_state: EXECUTED
+    pinned_commit: "5064bcee0c28ce85a69ff5e272c967789562d245"
     implementation_paths:
       - "Quillan-v4.2-model/quillan_council_enhanced.py"
+    evidence_paths:
+      - "evidence/receipts/bundles/QRUN-000002.json"
+      - "evidence/runs/QRUN-000002/structural-results.json"
+      - "evidence/runs/QRUN-000002/structural-test-report.txt"
     evidence_basis:
       - type: source_inspection
         detail: "HierarchicalConsensus and CouncilMoELayer consensus_score/modulation logic are present."
+      - type: ci_execution
+        detail: "QRUN-000002 verified scalar score shape (B,T,1), finite sigmoid range, output modulation under forced non-neutral consensus, and differentiability through consensus_weight."
     acceptance_criterion:
-      current: "Consensus network and modulation are present in source."
-      next: "Run a fixture demonstrating score shape, range, differentiability, and output modulation."
+      current: "QRUN-000002 PASS: score shape/range, modulation, and consensus-weight differentiation executed successfully."
+      next: "Repeat from a fresh checkout and separately characterize the exact hierarchy topology before stronger architectural claims."
     limitations:
-      - "The scalar is a learned model quantity; its semantic interpretation as truth, ethics, or correctness is not established."
+      - "The scalar is a learned model quantity; its semantic interpretation as truth, ethics, honesty, or correctness is not established."
+      - "The structural fixture does not establish that consensus improves model quality."
+      - "Internal CI execution is not independent reproduction."
     next_gate:
-      target_state: EXECUTED
-      requirement: "Add explicit consensus-path tests."
+      target_state: REPRODUCED
+      requirement: "Fresh-checkout rerun reproduces the bounded score, modulation, and differentiability checks."
 
   - id: Q-MODEL-005
     statement: "Experts selected by the enhanced router receive nonzero, finite gradients under a declared training fixture."
