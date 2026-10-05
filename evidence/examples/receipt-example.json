@@ -1,0 +1,59 @@
+{
+  "schema": "quillan-evidence-receipt-v1",
+  "receipt_id": "QREC-000000",
+  "run_id": "QRUN-000000",
+  "claim_ids": ["Q-MODEL-001"],
+  "repository": "ryansctt1994-sudo/Quillan-v4.2-repo",
+  "commit": "0000000000000000000000000000000000000000",
+  "branch": null,
+  "dirty_worktree": false,
+  "timestamp_utc": "2026-10-05T00:00:00Z",
+  "producer": {
+    "kind": "local",
+    "name": "TEMPLATE-ONLY-NOT-EVIDENCE",
+    "workflow_run": null,
+    "independent_of_project_author": false
+  },
+  "implementation": {
+    "entrypoint": "Quillan-v4.2-model/quillan_council_enhanced.py",
+    "config_path": null,
+    "checkpoint": null
+  },
+  "environment": {
+    "python": "UNSET",
+    "platform": "UNSET",
+    "torch": null,
+    "cuda": null,
+    "device": null,
+    "dependency_lock_sha256": null
+  },
+  "invocation": {
+    "command": "TEMPLATE ONLY - replace before use",
+    "working_directory": null,
+    "seed": null,
+    "dataset_id": null,
+    "dataset_sha256": null,
+    "config_sha256": null
+  },
+  "outcome": {
+    "status": "SKIPPED",
+    "exit_code": null,
+    "supports_state": "IMPLEMENTED",
+    "summary": "Schema example only. This file is not empirical evidence.",
+    "measurements": {},
+    "acceptance": {
+      "criterion": "Template demonstrates receipt shape only.",
+      "met": false
+    }
+  },
+  "artifacts": [],
+  "integrity": {
+    "receipt_sha256_policy": "Hash canonical UTF-8 JSON with integrity.receipt_sha256 omitted.",
+    "receipt_sha256": null
+  },
+  "notes": [
+    "TEMPLATE ONLY.",
+    "The all-zero commit is intentionally non-evidentiary.",
+    "Do not cite this receipt to promote a claim."
+  ]
+}
