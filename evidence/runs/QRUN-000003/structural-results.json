@@ -1,0 +1,17 @@
+{
+  "claim_ids": [
+    "Q-MODEL-002",
+    "Q-MODEL-003",
+    "Q-MODEL-004",
+    "Q-MODEL-005"
+  ],
+  "commit": "efea7fd21e35db573f2996c6b1775d2aa362fcd9",
+  "errors": 0,
+  "failures": 0,
+  "run_id": "QRUN-000003",
+  "schema": "quillan-structural-result-v1",
+  "skipped": 0,
+  "successful": true,
+  "test_report": "structural-test-report.txt",
+  "tests_run": 5
+}
