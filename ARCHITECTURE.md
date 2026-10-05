@@ -265,11 +265,11 @@ Future security validation should include:
 | Area | Current evidence ceiling | Reason |
 |---|---|---|
 | 32-expert configuration | `IMPLEMENTED` | Source/configuration declares 32 experts |
-| Sparse top-2 routing | `IMPLEMENTED` | Enhanced council layer contains router + top-k selection |
-| Router observability | `IMPLEMENTED` | Active experts and router logits are returned |
-| Hierarchical consensus network | `IMPLEMENTED` | Source contains a learned hierarchy and scalar score |
+| Sparse top-2 routing | `EXECUTED` | `QRUN-000002` verified exactly two valid expert selections per synthetic token |
+| Router observability | `EXECUTED` | `QRUN-000002` verified returned expert IDs, finite router logits, and selection/logit agreement |
+| Hierarchical consensus network | `EXECUTED` | `QRUN-000002` verified bounded scalar score, output modulation, and differentiability through the influence weight |
 | "Truth/ethical" meaning of consensus score | `PROPOSED` | Semantic interpretation is not established by source structure |
-| Expert gradient health | `PROPOSED` | Requires explicit gradient test |
+| Selected-expert gradient connectivity | `EXECUTED` | `QRUN-000003` verified selected experts and router receive finite nonzero gradients under the declared synthetic fixture |
 | Routing balance / no collapse | `PROPOSED` | Requires routing statistics across training/eval |
 | Expert specialization | `PROPOSED` | Requires specialization metric and ablation |
 | HNMoE > dense baseline | `PROPOSED` | Requires controlled benchmark |
@@ -280,6 +280,13 @@ Future security validation should include:
 | Consciousness / phenomenal experience | `PROPOSED` | No accepted operational mapping from current measurements |
 | Runtime safety guarantees | `PROPOSED` unless separately tested | Documentation is not execution evidence |
 | External / peer validation | `PROPOSED` unless reproducible artifact exists | Discussion or endorsement is not independent reproduction |
+
+### First retained execution evidence
+
+- `QRUN-000002` / `QREC-000002` is pinned to commit `5064bcee0c28ce85a69ff5e272c967789562d245` and advances only `Q-MODEL-002` through `Q-MODEL-004` to `EXECUTED`.
+- `QRUN-000003` / `QREC-000003` is pinned to commit `efea7fd21e35db573f2996c6b1775d2aa362fcd9` and additionally advances `Q-MODEL-005` to `EXECUTED`.
+- Both are internal GitHub Actions evidence on CPU with Python 3.11.16 and PyTorch 2.10.0+cpu; neither is a clean-room reproduction or independent validation.
+- `Q-MODEL-001` remains `IMPLEMENTED`: the synthetic guard instantiates 32 experts, but canonical model/config designation is still unresolved.
 
 ---
 
