@@ -1,0 +1,80 @@
+{
+  "artifacts": [
+    {
+      "kind": "stdout",
+      "path": "evidence/runs/QRUN-000002/structural-test-report.txt",
+      "sha256": "74f1ea512e6894d56e420417c1568acf7038847d3cba4973c396b7515aa583ae"
+    },
+    {
+      "kind": "result",
+      "path": "evidence/runs/QRUN-000002/structural-results.json",
+      "sha256": "b3ac51b3993df35a141ebc919f215aab91510d384eace8addb119bbaf52d5ca3"
+    }
+  ],
+  "branch": "research/architecture-claims-framework",
+  "claim_ids": [
+    "Q-MODEL-002",
+    "Q-MODEL-003",
+    "Q-MODEL-004"
+  ],
+  "commit": "5064bcee0c28ce85a69ff5e272c967789562d245",
+  "dirty_worktree": false,
+  "environment": {
+    "cuda": null,
+    "dependency_lock_sha256": null,
+    "device": "cpu",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.11.16",
+    "torch": "2.10.0+cpu"
+  },
+  "implementation": {
+    "checkpoint": null,
+    "config_path": "eval/structural/test_enhanced_council.py::FixtureConfig",
+    "entrypoint": "Quillan-v4.2-model/quillan_council_enhanced.py"
+  },
+  "integrity": {
+    "receipt_sha256": "a701b93517572e804e65b57ddf21b1b7e872b705796b8a29add7c75dffe73426",
+    "receipt_sha256_policy": "Hash canonical UTF-8 JSON with integrity.receipt_sha256 omitted."
+  },
+  "invocation": {
+    "command": "python evidence/run_structural_evidence.py",
+    "config_sha256": null,
+    "dataset_id": "synthetic-structural-fixture",
+    "dataset_sha256": null,
+    "seed": "1337/2026 fixture seeds",
+    "working_directory": "."
+  },
+  "notes": [
+    "This run exercises a tiny synthetic configuration and does not use a trained checkpoint.",
+    "Q-MODEL-001 remains IMPLEMENTED because canonical model/config designation is unresolved.",
+    "A PASS supports EXECUTED only for Q-MODEL-002 through Q-MODEL-004.",
+    "This is internal CI evidence, not independent reproduction."
+  ],
+  "outcome": {
+    "acceptance": {
+      "criterion": "All four structural guard tests pass; this receipt advances only Q-MODEL-002 through Q-MODEL-004.",
+      "met": true
+    },
+    "exit_code": 0,
+    "measurements": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests_run": 4
+    },
+    "status": "PASS",
+    "summary": "Structural checks executed successfully; Q-MODEL-002 through Q-MODEL-004 meet the EXECUTED gate.",
+    "supports_state": "EXECUTED"
+  },
+  "producer": {
+    "independent_of_project_author": false,
+    "kind": "ci",
+    "name": "github-actions",
+    "workflow_run": "37296211334"
+  },
+  "receipt_id": "QREC-000002",
+  "repository": "ryansctt1994-sudo/Quillan-v4.2-repo",
+  "run_id": "QRUN-000002",
+  "schema": "quillan-evidence-receipt-v1",
+  "timestamp_utc": "2026-10-05T10:23:28.969395Z"
+}
