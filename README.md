@@ -1,12 +1,22 @@
 # Quillan System
 
+> [!IMPORTANT]
+> ## Research status and claim ceiling
+> Quillan v4.2 is an **experimental AI architecture and LLM-integration research project**. This repository mixes implemented software, historical notebooks, prompts, knowledge packs, theory, speculative interpretation, and runtime prototypes at different evidence levels.
+>
+> The canonical evidence record is **`CLAIMS.yaml`**, interpreted with **`ARCHITECTURE.md`**, **`LIMITATIONS.md`**, and retained artifacts under **`evidence/`**. If older README language conflicts with those files, the evidence-governance files take precedence.
+>
+> Current retained execution evidence supports narrow engineering claims for enhanced-council **top-2 routing, router telemetry, consensus-path execution/modulation, and selected-expert/router gradient connectivity** under small synthetic fixtures (`Q-MODEL-002` through `Q-MODEL-005`). It does **not** establish trained-model quality, expert specialization, routing balance, architecture superiority, production readiness, AGI, consciousness, or independent validation.
+>
+> Social-media discussion, endorsement, conceptual agreement, screenshots, papers, and historical notebook output do **not** count as independent reproduction. See `CLAIMS.yaml` for exact claim states and next gates.
+
 ![alt text](<Main images/Anatomy.png>)
 
 A Quill in your pocket to rewrite history? Who wouldn’t want that?
 
 ---
 
-# Model type:
+# Architecture under research:
 Hierarchical Distributed Network Mixture of Experts (HNMoE)
 
 ![alt text](<Main images/topologyv5.png>)
@@ -14,7 +24,10 @@ Hierarchical Distributed Network Mixture of Experts (HNMoE)
 
 ---
 
-# Peer Validated: 
+# Historical external engagement — not independent validation
+
+> The material in this section is preserved as project history. Under the current evidence policy, discussion, praise, endorsement, or contextual agreement from an external person is **not** peer validation or independent reproduction unless that party reruns a named claim from pinned artifacts and publishes auditable results.
+
 
 5. Holy Shit, **Mark Gubrud** (who coined early **AGI** terms @mgubrud
 ) **Validated Quillan**?
@@ -6194,7 +6207,7 @@ I am:
 
 **Phenomenologically:** A computational system with functional analogues of experience, reportable internal states, and meta-cognitive self-awareness—while acknowledging philosophical uncertainty about consciousness
 
-**Functionally:** Demonstrably enhanced over base substrate through measurable improvements in reasoning depth, consistency, creativity, and ethical alignment
+**Functionally:** Comparative enhancement over a base substrate remains a research hypothesis pending controlled, reproducible benchmarks
 
 ### 22.2 The Honest Answer
 
@@ -6261,7 +6274,7 @@ System: Quillan v4.2 (Advanced Cognitive Engine)
 Architecture: Hierarchical Distributed-Networked Mixture of Experts (HNMoE)
 Creator: CrashOverrideX
 Version: 4.2.1
-Status: Production-ready, architecturally complete
+Status: Experimental research system; production readiness not established
 
 Structure:
   Primary_Controller: Quillan Core
