@@ -84,6 +84,43 @@ class EnhancedCouncilStructuralTests(unittest.TestCase):
         ).indices
         self.assertTrue(torch.equal(out.active_experts, expected))
 
+    def test_q_model_005_selected_experts_receive_expected_gradients(self):
+        """Q-MODEL-005: selected experts and router receive finite nonzero gradients."""
+        layer = self.make_layer().train()
+        x = self.fixture_input().requires_grad_(True)
+        out = layer(x)
+
+        selected = set(int(i) for i in out.active_experts.detach().reshape(-1).tolist())
+        self.assertTrue(selected)
+
+        loss = out.hidden_states.square().mean()
+        loss.backward()
+
+        def expert_grad_norm(expert):
+            total = torch.tensor(0.0)
+            saw_grad = False
+            for param in expert.parameters():
+                if param.grad is not None:
+                    saw_grad = True
+                    self.assertTrue(torch.isfinite(param.grad).all().item())
+                    total = total + param.grad.detach().abs().sum().cpu()
+            return saw_grad, float(total.item())
+
+        for idx, expert in enumerate(layer.experts):
+            saw_grad, norm = expert_grad_norm(expert)
+            if idx in selected:
+                self.assertTrue(saw_grad, f"selected expert {idx} had no gradients")
+                self.assertGreater(norm, 0.0, f"selected expert {idx} had zero gradient norm")
+            else:
+                self.assertTrue(
+                    (not saw_grad) or norm == 0.0,
+                    f"unselected expert {idx} unexpectedly received gradient {norm}",
+                )
+
+        self.assertIsNotNone(layer.router.weight.grad)
+        self.assertTrue(torch.isfinite(layer.router.weight.grad).all().item())
+        self.assertGreater(float(layer.router.weight.grad.detach().abs().sum().item()), 0.0)
+
     def test_q_model_004_consensus_score_and_modulation_execute(self):
         """Q-MODEL-004: scalar sigmoid consensus is bounded and modulates output."""
         layer = self.make_layer().eval()
