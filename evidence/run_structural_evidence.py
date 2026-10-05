@@ -173,7 +173,8 @@ def main() -> int:
         },
         "notes": [
             "This run exercises a tiny synthetic configuration and does not use a trained checkpoint.",
-            "Q-MODEL-001 remains IMPLEMENTED because canonical model/config designation is unresolved.",\n            "A PASS supports EXECUTED only for Q-MODEL-002 through Q-MODEL-004.",
+            "Q-MODEL-001 remains IMPLEMENTED because canonical model/config designation is unresolved.",
+            "A PASS supports EXECUTED only for Q-MODEL-002 through Q-MODEL-004.",
             "This is internal CI evidence, not independent reproduction.",
         ],
     }
