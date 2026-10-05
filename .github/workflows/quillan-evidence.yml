@@ -69,6 +69,6 @@ jobs:
         with:
           name: quillan-structural-evidence-${{ github.sha }}
           path: |
-            evidence/runs/QRUN-000003/
-            evidence/receipts/bundles/QRUN-000003.json
+            evidence/runs/QRUN-${{ github.run_id }}/
+            evidence/receipts/bundles/QRUN-${{ github.run_id }}.json
           if-no-files-found: error
