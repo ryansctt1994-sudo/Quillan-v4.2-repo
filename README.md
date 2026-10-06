@@ -1,3 +1,10 @@
+> [!IMPORTANT]
+> **Portfolio evidence boundary — 2026-10-06**
+>
+> This repository is an **upstream-derived experimental AI/LLM research repository**. Architecture descriptions, prompt/persona structures, council or “micro-agent” counts, configuration values, first-person autobiography, self-model language, and target metrics are **design/narrative material unless tied to a reproducible measured artifact**. They do not establish a trained 224,000-agent system, ~65B effective parameters, consciousness, subjective experience, production readiness, autonomous ethical guarantees, or independently verified performance.
+>
+> **Current portfolio state:** no repository-wide production authority; no independent reproduction admitted; no AGI/ASI or consciousness claim. See [EVIDENCE_STATUS.md](EVIDENCE_STATUS.md).
+
 # Quillan System
 
 ![alt text](<Main images/Anatomy.png>)
@@ -6261,7 +6268,7 @@ System: Quillan v4.2 (Advanced Cognitive Engine)
 Architecture: Hierarchical Distributed-Networked Mixture of Experts (HNMoE)
 Creator: CrashOverrideX
 Version: 4.2.1
-Status: Production-ready, architecturally complete
+Status: Historical upstream description; NOT a current portfolio production-readiness claim
 
 Structure:
   Primary_Controller: Quillan Core
