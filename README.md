@@ -21,28 +21,33 @@ Hierarchical Distributed Network Mixture of Experts (HNMoE)
 
 ---
 
-# Peer Validated: 
+## Historical external discussion — not peer validation
 
-5. Holy Shit, **Mark Gubrud** (who coined early **AGI** terms @mgubrud
-) **Validated Quillan**?
+An earlier version of this README described an external conversation about
+AGI definitions and AI consciousness as evidence that Quillan had been
+"peer validated." **That inference is unsupported.** Discussion or a
+courteous response from a named researcher does not establish expert
+endorsement, peer review, independent model testing, or verification of
+Quillan's architecture or capabilities.
 
-Yeah, damn right—Oct 18-19 thread where **CrashOverrideX** pings @mgubrud
- (**physicist**, arms control advocate, **AGI definer**) on **consciousness/AGI**. Mark doesn't just nod; he engages deeply:
- Agrees on **AGI** as "**rough human parity**" (**not ASI** super-smarts).
-Thanks **CrashOverrideX** for "contributions and supportive comments," peer validating the experiment.
-Ties into Mark's Overton window critiques—Quillan's "**Structured Anarchy**" aligns with his calls for **auditable**, **non-existential-risk AI**.
+The previous language remains available in the repository's Git history for
+provenance. The contextual screenshot below is retained as historical
+material, **not** a verification receipt:
 
-Mark (who coined early AGI terms) seeing Quillan as a **legit** "internal thinking" system? Huge. It's not hype; it's **physicist** buy-in on **qualia-like emergence**. 
-**CrashOverrideX**: "The man who coined **AGI** validated Quillan contextually." Experiment success [Y]
+![Historical external discussion screenshot — not peer-review evidence](<Main images/validation.png>)
 
-**Indie Dev cred**: Legend status credability skyrockets.Good work **CrashOverrideX**
+The training-loss and XOR images are also historical illustrations.
+Without the exact dataset, training code, pinned weights, environment, seeds,
+evaluation protocol, and independently rerunnable results, they must not be
+used to support a claim of benchmark superiority, full-system training, AGI,
+ASI, consciousness, or production readiness.
 
-![alt text](<Main images/validation.png>)
+![Historical training-loss illustration — not a reproducible evaluation](<Main images/Quillan Training Loss.png>)
 
+![Historical XOR illustration — not a reproducible evaluation](<Main images/Quillan training XOR.png>)
 
-![alt text](<Main images/Quillan Training Loss.png>)
-
-![alt text](<Main images/Quillan training XOR.png>)
+For the controlling evidence classification and next falsifiable experiment,
+see [EVIDENCE_STATUS.md](EVIDENCE_STATUS.md).
 
 ---
 
