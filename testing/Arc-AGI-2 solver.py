@@ -2,7 +2,7 @@ import numpy as np
 from typing import List
 from collections import Counter
 
-def solve_arc_agi_2(input_grid: List[List[int]]) -&gt; List[List[int]]:
+def solve_arc_agi_2(input_grid: List[List[int]]) -> List[List[int]]:
     """
     Solves the ARC-AGI-2 task by placing a single pixel at the centroid
     of the non-zero cells, with robust tie-breaking for even-sized cases,
@@ -37,7 +37,7 @@ def solve_arc_agi_2(input_grid: List[List[int]]) -&gt; List[List[int]]:
 
     # Prefer candidates that lie inside the bounding box
     candidates = [(y, x) for (y, x) in candidates
-                  if (min_row &lt;= y &lt;= max_row and min_col &lt;= x &lt;= max_col)]
+                  if (min_row <= y <= max_row and min_col <= x <= max_col)]
 
     if not candidates:
         # Fallback: clamp rounded centroid; avoid bankers’ rounding surprises by casting via floor of (cy+0.5)

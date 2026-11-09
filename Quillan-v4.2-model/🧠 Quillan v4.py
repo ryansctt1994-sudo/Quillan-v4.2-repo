@@ -1208,29 +1208,30 @@ TOKEN FLOW LOGIC:
 6. DECODE: Modal-specific decoders generate final artifacts.
 """
 
----
-
-### 📊 **Architecture Summary**
-
-| **Layer** | **Parameters** | **Purpose** |
-|-----------|----------------|-------------|
-| 1. Router | 300M (10%) | Complexity analysis & routing decisions |
-| 2. Multi-Modal MoE | 900M (30%) | Specialized expert processing (32 experts, top-4 active) |
-| 3. Encoders | 200M (6.7%) | Modal-specific input preprocessing (T/A/V/I) |
-| 4. Diffusion Reasoning | 500M (16.7%) | Council-based iterative refinement |
-| 5. Decoders | 1025M (34.2%) | Text (75M), Audio (400M), Video (400M), Image (150M) |
-| 6. Output Finalization | 75M (2.5%) | Cross-modal consistency & quality enhancement |
-| **TOTAL** | **~3.0B (100%)** | **Complete unified architecture** |
-
----
-
-### 🔥 **Key Innovations**
-
-1. **Adaptive Routing**: Tokens are dynamically routed through fast-path or diffusion-path based on complexity scores
-2. **Sparse Activation**: Only 4 of 32 experts active per token (12.5% activation = massive efficiency)
-3. **Conditional Diffusion**: Iterative reasoning only applied to complex tokens (saves compute)
-4. **Modal Unification**: Single architecture handles text, audio, video, and image with shared backbone
-5. **BitNet Quantization**: 1.58-bit quantized linear layers for parameter efficiency
-6. **Cross-Modal Consistency**: Final layer ensures coherence across modalities
-
----
+# --- Design notes (Markdown, kept as comments so this file parses) ---
+# ---
+#
+# ### 📊 **Architecture Summary**
+#
+# | **Layer** | **Parameters** | **Purpose** |
+# |-----------|----------------|-------------|
+# | 1. Router | 300M (10%) | Complexity analysis & routing decisions |
+# | 2. Multi-Modal MoE | 900M (30%) | Specialized expert processing (32 experts, top-4 active) |
+# | 3. Encoders | 200M (6.7%) | Modal-specific input preprocessing (T/A/V/I) |
+# | 4. Diffusion Reasoning | 500M (16.7%) | Council-based iterative refinement |
+# | 5. Decoders | 1025M (34.2%) | Text (75M), Audio (400M), Video (400M), Image (150M) |
+# | 6. Output Finalization | 75M (2.5%) | Cross-modal consistency & quality enhancement |
+# | **TOTAL** | **~3.0B (100%)** | **Complete unified architecture** |
+#
+# ---
+#
+# ### 🔥 **Key Innovations**
+#
+# 1. **Adaptive Routing**: Tokens are dynamically routed through fast-path or diffusion-path based on complexity scores
+# 2. **Sparse Activation**: Only 4 of 32 experts active per token (12.5% activation = massive efficiency)
+# 3. **Conditional Diffusion**: Iterative reasoning only applied to complex tokens (saves compute)
+# 4. **Modal Unification**: Single architecture handles text, audio, video, and image with shared backbone
+# 5. **BitNet Quantization**: 1.58-bit quantized linear layers for parameter efficiency
+# 6. **Cross-Modal Consistency**: Final layer ensures coherence across modalities
+#
+# ---
