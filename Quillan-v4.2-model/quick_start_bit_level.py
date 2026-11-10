@@ -16,15 +16,30 @@ import torch.nn as nn
 from typing import List, Dict, Any
 
 # Import from main model file
-import sys
-sys.path.append('.')
-from 🧠 Quillan v4 import (
-    QuillanBitSOTA,
-    GRPODAPOTrainer,
-    RLConfig,
-    quantize_model_for_inference,
-    BitOps
-)
+# The model file has an emoji in its name, which `import` cannot use, so load it by path.
+# NOTE: this script was written for an older API. The current file defines ModelConfig,
+# QuillanRoninV51, QuillanTrainer and QuillanInference, not the names below. The check
+# after the import fails loudly instead of running with missing pieces.
+import importlib.util
+from pathlib import Path
+
+_MODEL_FILE = Path(__file__).resolve().parent / "🧠 Quillan v4.py"
+_spec = importlib.util.spec_from_file_location("quillan_model_v4", _MODEL_FILE)
+_model = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_model)
+
+_REQUIRED = ["QuillanBitSOTA", "GRPODAPOTrainer", "RLConfig", "quantize_model_for_inference", "BitOps"]
+_missing = [name for name in _REQUIRED if not hasattr(_model, name)]
+if _missing:
+    raise ImportError(
+        f"{_MODEL_FILE.name} does not define {', '.join(_missing)}; this quick start needs updating "
+        "to the current API (ModelConfig, QuillanRoninV51, QuillanTrainer, QuillanInference)."
+    )
+QuillanBitSOTA = _model.QuillanBitSOTA
+GRPODAPOTrainer = _model.GRPODAPOTrainer
+RLConfig = _model.RLConfig
+quantize_model_for_inference = _model.quantize_model_for_inference
+BitOps = _model.BitOps
 
 def build_model_for_training(device: torch.device) -> QuillanBitSOTA:
     """Build model optimized for T4 GPU training"""

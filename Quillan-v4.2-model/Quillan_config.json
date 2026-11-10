@@ -16,5 +16,6 @@
     ]
   },
   "identity": "Quillan v4.2 Advanced Cognitive Engine",
-  "training_status": "complete"
+  "training_status": "not_verified",
+  "training_status_note": "No trained weights are included in this repository. The earlier value 'complete' is not supported by an artifact."
 }

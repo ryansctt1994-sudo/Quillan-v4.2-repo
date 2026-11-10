@@ -1206,7 +1206,6 @@ TOKEN FLOW LOGIC:
 4. DIFFUSE: Only complex tokens undergo iterative diffusion reasoning.
 5. FINALIZE: Cross-modal consistency and quality enhancement applied.
 6. DECODE: Modal-specific decoders generate final artifacts.
-"""
 
 ---
 
@@ -1234,3 +1233,4 @@ TOKEN FLOW LOGIC:
 6. **Cross-Modal Consistency**: Final layer ensures coherence across modalities
 
 ---
+"""
