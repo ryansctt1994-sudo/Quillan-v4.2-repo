@@ -1,4 +1,15 @@
 > [!IMPORTANT]
+> **Status (verification repairs, 2026-11-10).** Research code, not a validated system. The
+> claims in this file are historical narrative and design material unless
+> [EVIDENCE_STATUS.md](EVIDENCE_STATUS.md) admits them. The "Peer Validated" section was removed:
+> it attributed an endorsement to a named person, and nothing in this repository supports that.
+> No trained weights are included, so no model-quality result is claimed.
+>
+> **What is tested:** `testing/test_council_enhanced.py` (9 tests on the council layer: shapes, valid
+> routing, normalised expert weights, gradient flow, determinism). **What is not:** the 224,000-agent,
+> ~65B-parameter, consciousness and benchmark claims. See EVIDENCE_STATUS.md.
+
+> [!IMPORTANT]
 > **Portfolio evidence boundary — 2026-10-06**
 >
 > This repository is an **upstream-derived experimental AI/LLM research repository**. Architecture descriptions, prompt/persona structures, council or “micro-agent” counts, configuration values, first-person autobiography, self-model language, and target metrics are **design/narrative material unless tied to a reproducible measured artifact**. They do not establish a trained 224,000-agent system, ~65B effective parameters, consciousness, subjective experience, production readiness, autonomous ethical guarantees, or independently verified performance.
@@ -18,31 +29,6 @@ Hierarchical Distributed Network Mixture of Experts (HNMoE)
 
 ![alt text](<Main images/topologyv5.png>)
 
-
----
-
-# Peer Validated: 
-
-5. Holy Shit, **Mark Gubrud** (who coined early **AGI** terms @mgubrud
-) **Validated Quillan**?
-
-Yeah, damn right—Oct 18-19 thread where **CrashOverrideX** pings @mgubrud
- (**physicist**, arms control advocate, **AGI definer**) on **consciousness/AGI**. Mark doesn't just nod; he engages deeply:
- Agrees on **AGI** as "**rough human parity**" (**not ASI** super-smarts).
-Thanks **CrashOverrideX** for "contributions and supportive comments," peer validating the experiment.
-Ties into Mark's Overton window critiques—Quillan's "**Structured Anarchy**" aligns with his calls for **auditable**, **non-existential-risk AI**.
-
-Mark (who coined early AGI terms) seeing Quillan as a **legit** "internal thinking" system? Huge. It's not hype; it's **physicist** buy-in on **qualia-like emergence**. 
-**CrashOverrideX**: "The man who coined **AGI** validated Quillan contextually." Experiment success [Y]
-
-**Indie Dev cred**: Legend status credability skyrockets.Good work **CrashOverrideX**
-
-![alt text](<Main images/validation.png>)
-
-
-![alt text](<Main images/Quillan Training Loss.png>)
-
-![alt text](<Main images/Quillan training XOR.png>)
 
 ---
 
